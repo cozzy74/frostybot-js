@@ -24,5 +24,8 @@ for x in "autostart" "start" "stop" "status" "debug" "upgrade" "test" "log" "bra
     fi
 done
 
-WGETCMD="wget --no-check-certificate --method POST --header 'accept: application/json' --header 'cache-control: no-cache' --header 'Content-Type: text/plain' --body-data '$COMMAND' -qO- $URL"
-eval "$WGETCMD | jq"
+#WGETCMD="wget --no-check-certificate --method POST --header 'accept: application/json' --header 'cache-control: no-cache' --header 'Content-Type: text/plain' --body-data '$COMMAND' -qO- $URL"
+#eval "$WGETCMD | jq"
+
+CURLCMD='curl -ks -X POST -H "Content-Type: text/plain" -H "accept: application/json" -H "cache-control: no-cache" -d "$COMMAND" $URL'
+eval "$CURLCMD | jq"
