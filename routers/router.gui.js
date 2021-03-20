@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const api = require('../core/core.gui');
+const api = require('../core/core.routing.gui');
 const fs = require('fs'); 
 
 // Create routes
@@ -23,7 +23,7 @@ Object.keys(api).forEach(baseapi => {
             const baseapi = '/' + routeparts[1]
             const route = '/' + routeparts.slice(1).join('/')
 
-            const api = require('../core/core.gui');
+            const api = require('../core/core.routing.gui');
             var baseapis = Object.keys(route);
             for (var i =0; i < baseapis.count; i++) {
                 const routes = api.hasOwnProperty(baseapi) ? api[baseapi] : null
