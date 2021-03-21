@@ -37,7 +37,7 @@ We kindly ask that you fully [**read the documentation**](https://github.com/Cry
 Use this API at your own risk. The authors accept no responsibility for losses incurred through using this software. This is a 0.x release which means it's beta software. So it may and probably will have some bugs. We strongly advise you to use a sub-account with a limited balance, or a testnet account to ensure that the bot is profitable before going live with any strategy. While we have gone to great lengths to test the software, if you do find any bugs, please report them to us in the [FrostyBot Discord Server](https://discord.gg/yK4U93s) or on Github, and we will sort them out. Remember that risk management is your responsibility. If you lose your account, that's entirely on you.
 
 ## Supported Exchanges
-Currently Bitmex, FTX, Deribit and Binance (Spot and Futures) are supported. But we will add support for others in the near future. 
+Currently Bitmex, FTX, Deribit, Binance (Spot, Margin, USDT and Coin-M Futures) and BinanceUS are supported. But we will add support for others in the near future. 
 
 ## Scope      
 This bot is specifically designed to execute orders based on webhook or REST API requests. These can be from Tradingview, or any other software that can execute webhooks.
@@ -48,17 +48,14 @@ While it may seem a little complicated to setup and configure for novices, the p
 Frostybot can be deployed in 3 supported ways. Depending on your personal deployment preference, you will need the following:
 
 #### Option 1 - Run Your Own Server (Like Amazon Lightsail VPS)
+
 * A Linux server, preferably running Ubuntu 20.04 LTS  (we recommend Amazon Lightsail for this purpose)
 * A public static IP address
 
 #### Option 2 - Use Docker
 
 * A Docker Server
-
-#### Option 3 - Microsoft Azure (Easiest)
-
-* A [Microsoft Azure](https://portal.azure.com) account 
-* [Putty client](https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.74-installer.msi) to connect to your Frostybot console
+* A public static IP address
 
 ## Installation
 
@@ -85,14 +82,6 @@ The following Docker environment variables are available:
 | SSH_USER  |  SSH Username |  frostybot  |
 | SSH_PASS  |  SSH Password **(NEVER leave this as default)**  |  \_\_frostybot123\_\_  |
 
-#### Option 3 - Microsoft Azure (Easiest)
-
-If you would like to use Azure, click the Deploy to Azure button below to easily deploy the Docker container to your Azure account.
-
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCryptoMF%2Ffrostybot-js%2Fstable%2Fdeploy-azure.json)
-
-**Important:** Do not use the word "frostybot" in your Azure server name, as this will make your bot easier to find.
-
 ## Post-Install Configuration
 
 #### Start the Frostybot server
@@ -116,7 +105,7 @@ frostybot gui:enable email=<your email address> password=<your preferred passwor
 
 You will then be able to browse to http://\<your vps ip\> and login to the GUI. Currently you can configure your API keys and a bunch of other settings via the GUI.
 
-![gui](https://i.imgur.com/gAYTwQM.png "#GUI")
+![gui](https://i.imgur.com/jIVw4Ij.png "#GUI")
 
 
 #### Add your exchange API keys to Frostybot
@@ -126,7 +115,7 @@ You will need to identify this account in Frostybot using what is called a stub.
 frostybot accounts:add stub=mystub exchange=ftx apikey="<apikey>" secret="<secret>" subaccount="Algo-Trading"
 ```
 
-**Important:** The subaccount parameter is case-sensitive. Make sure that it is exactly the same as the name on the exchange. The API keys will be tested with the exchange when you add them so you can be sure they work correctly. Once your API keys have been added, you're ready to start using Frostybot!
+**Important:** On FTX, the subaccount parameter is case-sensitive and required if your are using a subaccount. It is not required for other exchanges. If using a subacocunt in FTX, make sure that it is exactly the same as the name on the exchange. The API keys will be tested with the exchange when you add them so you can be sure they work correctly. Once your API keys have been added, you're ready to start using Frostybot!
 
 ## Usage
 

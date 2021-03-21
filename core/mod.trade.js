@@ -975,6 +975,18 @@ module.exports = class frostybot_trade_module extends frostybot_module {
     async create_and_submit_order(type, params) {
         const stub = params.stub
         const symbol = params.symbol
+        
+        // Disable reduce=true for FTX spot markets
+        if (String(params.reduce) == 'true') {
+            var exch = await this.accounts.get_shortname_from_stub(params.stub);
+            if (exch.indexOf('ftx') != -1) { 
+                var market = await this.exchange[stub].execute('get_market_by_id_or_symbol',symbol.toUpperCase());
+                if ((market.type == 'spot') && (params.hasOwnProperty('reduce'))) {
+                    delete params.reduce;
+                }
+            }
+        }
+
         this.queue.clear(stub, symbol)
         await this.create_order(type, params);
         return await this.queue.process(stub, symbol);;
